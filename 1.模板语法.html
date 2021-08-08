@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <style>
+        .red{
+            background-color: blueviolet;
+        }
+        .yellow{
+            background-color: cornflowerblue;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        {{myname}}
+        <button @click="handleClick()">change</button>
+
+        <div v-show="isShow">我是动态隐藏和显示</div>
+
+        <div v-if="isCreated">我是动态创建和删除</div>
+
+        <div v-bind:class="isActive?'red':'yellow'">动态切换背景色</div>
+        <div :class="isActive?'red':'yellow'">动态切换背景色</div>
+
+        <ul style="list-style: none;">
+            <li v-for="(item,index) in datalist">
+                {{item}}-----{{index}}
+            </li>
+        </ul>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el:"#box",
+        data:{
+            myname:"cilicili",
+            isShow:true,
+            isCreated:true,
+            isActive:true,
+            datalist:["aaa","bbb","ccc","ddd","eee"]
+        },
+        methods:{
+            handleClick(){
+                console.log("handleClick")
+                this.myname="bilibili"
+                this.isShow=!this.isShow
+                console.log("isCreated")
+                this.isCreated=!this.isCreated
+                this.isActive=!this.isActive
+            }
+        }
+    })
+</script>
+</html>

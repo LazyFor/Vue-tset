@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <child1></child1>
+        <child2></child2>
+    </div>
+    <script>
+        
+        let bus = new Vue()
+
+        Vue.component("child1",{
+            template:`
+                <div>lll-<button @click=handleClick()>详细信息</button></div>
+            `,
+            methods:{
+                handleClick(){
+                    bus.$emit("ls","abcdEFG")
+                }
+            }
+        })
+        
+        Vue.component("child2",{
+            template:`
+                <div>kkk-订阅者</div>
+            `,
+            mounted(){
+                console.log("mounted-生命周期-dom创建完后就会触发")
+                bus.$on("ls",(data)=>{
+                    console.log("订阅者child2---",data)
+                })
+            }
+        })
+        let vm = new Vue({
+            el:"#box"
+        })
+    </script>
+</body>
+</html>

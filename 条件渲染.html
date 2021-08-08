@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <ul>
+            <li v-for="data in list" :key="data.id">
+                <div>{{data.name}}</div>
+                <div>{{data.price}}</div>
+                <div v-if="data.state===0">未支付</div>
+                <div v-else-if="data.state===1">已发货</div>
+                <div v-else="data.state===2">已完成</div>
+            </li>
+        </ul>
+    </div>
+    <script>
+        const vm = new Vue({
+            el:"#box",
+            data:{
+                list:[
+                    {
+                        id:1,
+                        name:"红米k40",
+                        price:2000,
+                        state:0
+                    },
+                    {
+                        id:2,
+                        name:"小米11",
+                        price:4000,
+                        state:1
+                    },
+                    {
+                        id:3,
+                        name:"iphone12",
+                        price:6000,
+                        state:2
+                    }
+                ]
+            }
+        })
+    </script>
+</body>
+</html>

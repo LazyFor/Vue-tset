@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>Document</title>
+    <style>
+        .active{
+            background-color: royalblue;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <ul>
+            <li v-for="(item,index) in datalist" :class="current===index?'active':''" @click="handleClick(index)">
+                {{item}}
+            </li>
+        </ul>
+    </div>
+    <script>
+        let vm = new Vue({
+            el:"#box",
+            data:{
+                datalist:["首页","列表","购物车"],
+                current:0
+            },
+            methods:{
+                handleClick(index){
+                    console.log(index)
+                    this.current = index
+                }
+            }
+        })
+    </script>
+</body>
+</html>

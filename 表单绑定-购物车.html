@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <style>
+           li{
+                display: flex;
+                justify-content: space-around;
+                padding: 10px;
+            }
+
+            li img{
+                width: 100px;
+            }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div v-if="list.length===0">购物车空空如也</div>
+
+        <template v-else>
+            <input type="checkbox" @change="handleAllChecked" v-model="isAllChecked" />全选/全不选
+            <ul >
+              <li v-for="(item,index) in list" :key="item.id">
+                <input type="checkbox" v-model="checkGroup" :value="item" @change="checked()"/>
+                <img :src="item.pic"/>
+                <div>
+                  <div>名称:{{item.name}}</div>
+                  <div>价格:￥{{item.price}}</div>
+                </div>
+                <div>
+                  <button @click="item.number--" :disabled="item.number===1">-</button>
+                  {{item.number}}
+                  <button @click="item.number++"  :disabled="item.number===item.limit">+</button>
+                </div>
+    
+                <div>
+                  <button @click="handleDelete(index,item.id)">删除</button>
+                </div>
+              </li>
+            </ul>
+            <div>总金额 :  {{ sum() }}</div>
+          </template>
+        
+    </div>
+    <script>
+        const vm = new Vue({
+            el:"#box",
+            data:{
+                list:[
+                {
+                  name:"商品1",
+                  price:10,
+                  number:1,
+                  id:1,
+                  limit:5,//限购
+                  pic:"https://static.maizuo.com/pc/v5/usr/movie/44dc08914d508fc47c8267c6ca73f2d8.jpg"
+                },
+                {
+                  name:"商品2",
+                  price:20,
+                  number:2,
+                  id:2,
+                  limit:10,//限购
+                  pic:"https://static.maizuo.com/pc/v5/usr/movie/44dc08914d508fc47c8267c6ca73f2d8.jpg"
+                },
+                {
+                  name:"商品3",
+                  price:30,
+                  number:3,
+                  id:3,
+                  limit:15,//限购
+                  pic:"https://static.maizuo.com/pc/v5/usr/movie/44dc08914d508fc47c8267c6ca73f2d8.jpg"
+                }
+              ],
+              checkGroup:[],
+              isAllChecked:false
+            },
+            methods:{
+                sum(){
+                    //依赖checkgroup,
+                    var total = 0
+
+                    this.checkGroup.forEach(item=>{
+                        total+= item.price*item.number
+                    })
+
+                    // console.log(total)
+
+                    return total
+                },
+                handleDelete(index,deleteid){
+                    console.log(deleteid)
+                    //删除原数组
+                    this.list.splice(index,1)
+                    this.checked()
+
+                    //删除checkGroup对应元素
+                    this.checkGroup = this.checkGroup.filter(item=>item.id!==deleteid)
+
+                },
+                handleAllChecked(ev){
+                    // console.log("checked",ev.target.checked)
+                    if(this.isAllChecked){
+                        this.checkGroup=this.list
+                    }else{
+                        this.checkGroup=[]
+                    }
+                },
+                checked(){
+                    if(this.checkGroup.length===this.list.length){
+                        this.isAllChecked = true
+                    }else{
+                        this.isAllChecked = false
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

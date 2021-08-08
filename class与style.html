@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <style>
+        .red{
+            background-color: cornflowerblue;
+        }
+        .yellow{
+            background-color: orange;
+        }
+        .a{}
+        .b{}
+        .c{}
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div :class="classobj">动态切换class-对象写法</div>
+        <div :class="classarr">动态切换class-数组写法</div>
+
+        <div :style="styleobj">动态切换style-对象写法</div>
+        <div :style="stylearr">动态切换style-数组写法</div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#box",
+            data:{
+                classobj:{
+                    a:true,
+                    b:true,
+                    c:true
+                },
+                classarr:["aa","bb","cc"],
+                styleobj:{
+                    backgroundColor:"red"
+                },
+                stylearr:[{
+                    backgroundColor:"orange"
+                }]
+            }
+        })
+    </script>
+</body>
+</html>
