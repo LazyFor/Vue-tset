@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<style>
+    .john-enter-active {
+      animation: bbb 1.5s;
+    }
+
+    .john-leave-active {
+      animation: bbb 1.5s reverse;
+    }
+
+    @keyframes bbb {
+      0% {
+        opacity: 0;
+        transform: translateX(100px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateX(0px);
+      }
+    }
+  </style>
+<body>
+    <div id="box">
+        <button @click="isShow=!isShow">点我啊</button>
+        <transition name="john" appear mode="out-in">
+            <div v-if="isShow" key="kiki">kikikikiki</div>
+            <div v-else key="lili">lilililili</div>
+        </transition>
+    </div>
+    <script>
+        let vm = new Vue({
+            el:"#box",
+            data:{
+                isShow:true
+            }
+
+        })
+    </script>
+</body>
+</html>

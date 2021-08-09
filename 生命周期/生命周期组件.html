@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        {{myname}}
+        <button @click="handleClick">点我啊</button>
+    </div>
+    <script>
+        //创建根组件（每个组件都有8个生命周期，如果需要，自己用）
+        let vm = new Vue({
+            el:"#box",
+            data:{
+                myname:"john"
+            },
+            methods:{
+                handleClick(){
+                    this.myname="kiki"
+                    //状态修改之后，异步更新dom
+                }
+            },
+            //
+            beforeCreate(){
+                console.log("beforeCreate",this.myname)
+            },
+            created(){
+                console.log("created","初始化工作",this.myname)
+            },
+            beforeMount(){
+                console.log("beforeMount","dom挂载之前,无法访问dom")
+            },
+            mounted(){
+                console.log("mounted","dom挂载完成了，访问dom","监听事件，Ajax，设置定时器")
+            },
+            beforeUpdate(){
+                console.log("beforeUpdate")
+            },
+            updated(){
+                console.log("update","获取更新后的dom")
+            },
+            beforeDestroy(){
+                console.log("beforeDestroy")
+            },
+            destroyed(){
+                console.log("destroyed")
+            }
+        })
+    </script>
+</body>
+</html>

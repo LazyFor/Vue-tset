@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="lib/swiper/css/swiper.css">
+    <script src="lib/swiper/js/swiper.js"></script>
+    <script src="lib/vue.js"></script>
+    <style>
+        .test{
+            width: 600px;
+            height: 300px;
+            background-color: dodgerblue;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <swiper :key="datalist.length">
+            <div class="swiper-slide" v-for="data in datalist">
+                {{data}}
+            </div>
+        </swiper>
+    </div>
+    <script>
+        Vue.component("swiper",{
+            template:`
+            <div class="swiper-container test">
+                <div class="swiper-wrapper">
+                    <slot></slot>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+
+                <div class="swiper-pagination"></div>
+            </div>
+            `,
+            mounted(){
+                new Swiper(".test",{
+                    loop:true,
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    pagination: {
+                        el: '.swiper-pagination',
+                    }
+                })
+            }
+        })
+        let vm = new Vue({
+            el:"#box",
+            data:{
+                datalist:[],
+            },
+            mounted(){
+                setTimeout(()=>{
+                    this.datalist = ["aaa","bbb","ccc"]
+                },2000)
+            },
+        })
+    </script>
+</body>
+</html>
