@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <div v-hello="'skyblue'">1111111111</div>
+        <div v-hello="'orange'">1111111111</div>
+        <div v-hello="'gray'">1111111111</div>
+
+        <div v-hello="mycolor">55555555</div>
+    </div>
+    <script>
+        Vue.directive("hello",{
+            inserted(el,binding){
+                console.log("绑定当前指令的标签插入父节点就会执行了-指令的生命周期-1",el,binding.value)
+                el.style.background=binding.value
+            },
+            update(el,binding){
+                el.style.background=binding.value
+            }
+        })
+        let vm = new Vue({
+            el:"#box",
+            data:{
+                mycolor:"red"
+            }
+        })
+    </script>
+</body>
+</html>

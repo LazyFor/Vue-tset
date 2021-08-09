@@ -37,7 +37,7 @@
 <body>
     <div id="box">
         <button @click="isShow=true">show</button>
-        //self禁止冒泡
+        <!-- //self禁止冒泡 -->
         <div id="overlay" v-show="isShow" @click.self="isShow=false">
             <div id="center">
                 <div>用户名：<input type="text"></div>
